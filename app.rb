@@ -72,7 +72,8 @@ get '/documents' do
 end
 
 get '/documents/new' do
-  erb :'documents/index'
+  @author = Author.all
+  erb :'documents/new'
 end
 
 get '/documents/:id' do
