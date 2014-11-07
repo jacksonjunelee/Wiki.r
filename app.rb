@@ -50,11 +50,13 @@ post '/authors' do
     redirect("/authors/#{author.id}")
   else
     redirect("/authors/new")
+  end
+end
 
 # show
 get '/authors/:id' do
   @author = Author.find(:id)
-  @documents = @author.documents
+  @documents = @author.versions
   erb :'authors/show'
 end
 
@@ -69,7 +71,7 @@ get '/documents' do
 end
 
 get '/documents/new' do
-  documents/index'
+  erb :'documents/index'
 end
 
 get '/documents/:id' do

@@ -7,19 +7,18 @@ create table authors(
 	first_name varchar(255) not null,
   last_name varchar(255) not null,
   username varchar(255) not null
-	document_id integer references documents,
+);
+
+create table documents(
+	id serial primary key,
+	title text not null
 );
 
 create table versions(
 	id serial primary key,
 	v_date integer not null,
   blurb text not null,
-	content text not nulls,
+	content text not null,
 	author_id integer references authors,
-  document_id integer references documents,
-);
-
-create table documents(
-	id serial primary key,
-	title text not null,
+  document_id integer references documents
 );
