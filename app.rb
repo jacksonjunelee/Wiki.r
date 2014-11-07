@@ -33,16 +33,31 @@ end
       # =========
       #   Author
       # =========
-
+# index
 get '/authors' do
   @authors = Author.all
   erb :'authors/index'
 end
 
+# new
+get '/authors/new' do
+  erb :'authors/new'
+end
+
+post '/authors' do
+  author = Author.new(params[:author])
+  if author.save
+    redirect("/authors/#{author.id}")
+  else
+    redirect("/authors/new")
+
+# show
 get '/authors/:id' do
-  author = Author.find(:id)
+  @author = Author.find(:id)
+  @documents = @author.documents
   erb :'authors/show'
 end
+
 
       # ============
       #   Document
@@ -53,7 +68,11 @@ get '/documents' do
   erb :'documents/index'
 end
 
-get '/authors/:id' do
-  author = Author.find(:id)
-  erb :'authors/show'
+get '/documents/new' do
+  documents/index'
+end
+
+get '/documents/:id' do
+  @document = Document.find(:id)
+  erb :'documents/show'
 end
