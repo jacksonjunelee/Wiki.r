@@ -1,3 +1,5 @@
+<a href="/documents/new"> Add a New Document </a><br>
+
 <% @documents.each do |document| %>
   <a href= "/documents/<%= document.id %>"> <%=document.title %></a>
   <% end %>

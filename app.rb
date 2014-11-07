@@ -66,17 +66,35 @@ end
       #   Document
       # =============
 
+# index
 get '/documents' do
   @documents = Document.all
   erb :'documents/index'
 end
 
+# new
 get '/documents/new' do
   @author = Author.all
   erb :'documents/new'
 end
 
+post '/documents' do
+  document = Document.create(params[:document])
+  version = Version.new(params[:version])
+  if version.save
+    redirect("/versions/#{document.id}")
+  else
+    redirect("/documents/new")
+  end
+end
+
+
+# show
 get '/documents/:id' do
   @document = Document.find(params[:id])
   erb :'documents/show'
 end
+
+      # ============
+      #   Version
+      # =============
