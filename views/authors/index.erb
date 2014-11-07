@@ -1,5 +1,8 @@
-<h2> <a href="/authors/new"> Become an Author in this Suite Wiki</a> 
+<h2> <a href="/authors/new"> Become an Author in this Suite Wiki</a> <br>
 
+<ul>
 <% @authors.each do |author| %>
-<%= author.username %>
+<li><a href= "/authors/<%= author.id %>"> <%= author.username %>
+    </a></li>
 <% end %>
+</ul>

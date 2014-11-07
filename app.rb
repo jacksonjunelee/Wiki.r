@@ -55,8 +55,9 @@ end
 
 # show
 get '/authors/:id' do
-  @author = Author.find(:id)
-  @documents = @author.versions
+  @author = Author.find(params[:id])
+  doc_id_array = @author.versions.map {|doc_id| doc_id.document_id}
+  @documents = doc_id_array.map {|doc_id| Document.find(doc_id)}
   erb :'authors/show'
 end
 
@@ -75,6 +76,6 @@ get '/documents/new' do
 end
 
 get '/documents/:id' do
-  @document = Document.find(:id)
+  @document = Document.find(params[:id])
   erb :'documents/show'
 end
