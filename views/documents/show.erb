@@ -1,1 +1,8 @@
-<%= @document.title %>
+<%= @document.title %><br>
+
+<label for="author">Edited by:
+<%= @content.first.author.username %>
+</label><br>
+
+<%= @content.first.content %><br>
+<%= @content.first.blurb %><br>

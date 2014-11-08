@@ -81,6 +81,7 @@ end
 post '/documents' do
   document = Document.create(params[:document])
   version = Version.new(params[:version])
+  version.document = document
   if version.save
     redirect("/versions/#{document.id}")
   else
@@ -92,8 +93,14 @@ end
 # show
 get '/documents/:id' do
   @document = Document.find(params[:id])
+  @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
+  # @content = content.first
+  # @author = @content.first.author.username
   erb :'documents/show'
 end
+
+# edit/ update
+
 
       # ============
       #   Version

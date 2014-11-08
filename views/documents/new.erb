@@ -2,11 +2,11 @@
 
 <form action="/documents" method="post">
 
-<label for="title">Title </label>
+<label for="title">Title: </label>
   <input type="text" name="document[title]" value="">
     </label><br>
 
-  <label for="author">Author<br>
+  <label for="author">Author:
 		<select name="version[author_id]">
 			<% @author.each do |author| %>
 				<option value="<%= author.id %>"><%= author.username %></option>
@@ -14,15 +14,15 @@
 		</select>
 	</label><br>
 
-<label for="Content">Content </label>
+<label for="Content">Content: </label>
   <input type="textbox" name="version[content]" value="">
     </label><br>
 
-<label for="Comment">Leave a Comment </label>
+<label for="Comment">Leave a Comment: </label>
   <input type="textbox" name="version[blurb]" value="">
     </label><br>
 
-<label for="Date">Date </label>
+<label for="Date">Date: </label>
   <input type="text" name="version[v_date]" value="">
     <optio  </select>
     </label><br>
