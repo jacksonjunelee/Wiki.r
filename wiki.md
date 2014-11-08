@@ -27,6 +27,8 @@ A wiki is an application that allows users to create and modify content collabor
   recognized
 - As a user, I want to be able to edit (create a new version for) a wiki
   document, so I can correct others' work
+
+
 - As a user, I want to be able to delete a wiki document, so I can remove all
   traces of an inappropriate document
 - As a user, I want to be able to create an author, so I can add more people to
@@ -40,6 +42,13 @@ A wiki is an application that allows users to create and modify content collabor
   for a document, so I can appreciate its evolution
 - As a user, I want to be able to see a single version of the document, so I can
   inspect a document's snapshot in time in detail
+
+  - As a user, I want to be able to delete a wiki document, so I can remove all
+    traces of an inappropriate document
+    As a user, I want to be able to edit an author's information, so I can update
+      my information
+      - As a user, I want to be able to see a single version of the document, so I can
+        inspect a document's snapshot in time in detail
 
 ---
 

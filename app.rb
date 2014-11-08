@@ -99,6 +99,23 @@ get '/documents/:id' do
   erb :'documents/show'
 end
 
+# edit and update
+get '/documents/:id/edit' do
+  @document = Document.find(params[:id])
+  @authors = Author.all
+  erb :'documents/edit'
+end
+
+put '/documents/:id' do
+	version = Version.new(params[:version])
+  version.document = Document.find(params[:id])
+	if version.save
+		redirect("/documents")
+	else
+		redirect("/documents")
+	end
+end
+
 # show past versions of documents
 
 get '/documents/:id/previous_versions' do

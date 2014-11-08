@@ -1,0 +1,29 @@
+<h3> Edit <%= @document.title %> </h3>
+
+<form action="/documents/<%= @document.id %>" method="POST">
+	<input type="hidden" name="_method" value="PUT">
+
+<label for="author">Author:
+    <select name="version[author_id]">
+      <% @authors.each do |author| %>
+        <option value="<%= author.id %>"><%= author.username %></option>
+      <% end %>
+    </select>
+  </label><br>
+
+<label for="Content">Content: </label>
+    <input type="textbox" name="version[content]" value="">
+      </label><br>
+
+  <label for="Comment">Leave a Comment: </label>
+    <input type="textbox" name="version[blurb]" value="">
+      </label><br>
+
+  <label for="Date">Date: </label>
+    <input type="text" name="version[v_date]" value="">
+      <optio  </select>
+      </label><br>
+
+  <input type="submit" name="submit" value="Submit Document">
+
+</form>

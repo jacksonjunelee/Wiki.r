@@ -1,4 +1,4 @@
-<%= @document.title %><br>
+<%= @document.title %><a href= "/documents/<%= @document.id %>/edit"> Edit </a><br>
 
 <label for="author">Edited by:
 <%= @content.first.author.username %>
