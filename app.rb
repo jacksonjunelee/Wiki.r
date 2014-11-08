@@ -99,7 +99,15 @@ get '/documents/:id' do
   erb :'documents/show'
 end
 
-# edit/ update
+# show past versions of documents
+
+get '/documents/:id/previous_versions' do
+  @document = Document.find(params[:id])
+  @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
+  @pre_ver = @content[1..-1]
+  erb :'documents/previous_versions'
+end
+
 
 
       # ============
