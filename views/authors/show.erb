@@ -1,6 +1,8 @@
 <%= @author.username %>
 
+<ul>
 <h2> List of Documents made by <%= @author.username%> : </h2>
 <% @documents.each do |document| %>
-<%= document.title %>
+<%= document.title %><br>
 <% end %>
+</ul>

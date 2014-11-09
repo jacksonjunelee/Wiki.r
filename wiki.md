@@ -50,15 +50,17 @@ A wiki is an application that allows users to create and modify content collabor
       - As a user, I want to be able to see a single version of the document, so I can
         inspect a document's snapshot in time in detail
 
----
+        text-area
+
+---comment id, things, date
 
 ### Bonus
 
 - **Additional Entities**
-  - `comment`
+  - `comment` in document but in discuss page
 - **Further User Stories**:
   - As a user, I want to be able to search for wikis by title (only exact
-    matches need to be supported), so I can quickly find what I'm looking for
+    matches need to be supported), so I can quickly find what I'm looking for  (layout)
   - As a user, I want to be able to add comments to a wiki page on a "discuss"
     page used to discuss changes to a wiki document, so collaborators can talk
     debate about changes to a document

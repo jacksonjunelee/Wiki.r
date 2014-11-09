@@ -83,7 +83,7 @@ post '/documents' do
   version = Version.new(params[:version])
   version.document = document
   if version.save
-    redirect("/versions/#{document.id}")
+    redirect("/documents/#{document.id}")
   else
     redirect("/documents/new")
   end
@@ -107,13 +107,27 @@ get '/documents/:id/edit' do
 end
 
 put '/documents/:id' do
+  document = Document.find(params[:id])
 	version = Version.new(params[:version])
   version.document = Document.find(params[:id])
 	if version.save
-		redirect("/documents")
+		redirect("/documents/#{document.id}")
 	else
 		redirect("/documents")
 	end
+end
+
+#destroy
+
+delete '/documents/:id' do
+  document = Document.find(params[:id])
+  document.versions.destroy
+  document.destroy
+  if document.destroy
+    redirect("/documents")
+  else
+    redirect("/documents/#{document.id}")
+  end
 end
 
 # show past versions of documents
@@ -125,7 +139,7 @@ get '/documents/:id/previous_versions' do
   erb :'documents/previous_versions'
 end
 
-
+binding.pry
 
       # ============
       #   Version
