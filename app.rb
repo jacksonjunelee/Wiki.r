@@ -121,7 +121,6 @@ end
 
 delete '/documents/:id' do
   document = Document.find(params[:id])
-  document.versions.destroy
   document.destroy
   if document.destroy
     redirect("/documents")
@@ -139,7 +138,13 @@ get '/documents/:id/previous_versions' do
   erb :'documents/previous_versions'
 end
 
-binding.pry
+
+get '/documents/:id/previous_versions/:var' do
+  @document = Document.find(params[:id])
+  @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
+  @show_pre_ver = @content.find {|ver| ver.id == 10}
+  erb :'documents/pre_ver_show'
+end
 
       # ============
       #   Version

@@ -4,7 +4,12 @@
 <%= @content.first.author.username %>
 </label><br>
 
-<%= @content.first.content %><br>
+<label for="blurb">Description:
 <%= @content.first.blurb %><br>
+</label><br>
+
+<label for="content">Content:
+<%= @content.first.content %><br>
+</label><br>
 
 <a href= "/documents/<%= @document.id %>/previous_versions"> Previous Versions </a>
