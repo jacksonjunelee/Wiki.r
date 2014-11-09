@@ -142,9 +142,11 @@ end
 get '/documents/:id/previous_versions/:var' do
   @document = Document.find(params[:id])
   @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
-  @show_pre_ver = @content.find {|ver| ver.id == 10}
+  @show_pre_ver = @content.find {|ver| ver.id == 7}
   erb :'documents/pre_ver_show'
 end
+
+# Document.find(1).versions.find {|ver| ver.id == 10}
 
       # ============
       #   Version

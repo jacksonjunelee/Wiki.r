@@ -22,3 +22,10 @@ create table versions(
 	author_id integer references authors,
   document_id integer references documents
 );
+
+create table comments(
+	id serial primary key,
+	c_date integer not null,
+	com text not null,
+	document_id integer references documents	
+);
