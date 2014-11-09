@@ -1,3 +1,4 @@
 class Comment < ActiveRecord::Base
-  belongs_to :documents
+  belongs_to :document
+  belongs_to :author
 end

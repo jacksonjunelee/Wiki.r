@@ -1,6 +1,7 @@
-drop table if exists authors cascade;
-drop table if exists versions cascade;
-drop table if exists documents cascade;
+-- drop table if exists authors;
+-- drop table if exists versions;
+-- drop table if exists documents;
+drop table if exists comments cascade;
 
 create table authors(
 	id serial primary key,
@@ -27,5 +28,6 @@ create table comments(
 	id serial primary key,
 	c_date integer not null,
 	com text not null,
-	document_id integer references documents	
+	author_id integer references authors,
+	document_id integer references documents
 );

@@ -8,6 +8,7 @@ require 'pry'
 require_relative 'models/authors.rb'
 require_relative 'models/versions.rb'
 require_relative 'models/documents.rb'
+require_relative 'models/comments.rb'
 
 
 configure :development do
@@ -145,9 +146,28 @@ get '/documents/:id/previous_versions/:var' do
   @show_pre_ver = @content.find {|ver| ver.id == 7}
   erb :'documents/pre_ver_show'
 end
-
 # Document.find(1).versions.find {|ver| ver.id == 10}
+# 7?
+
+# show discussions page and make new comments
+
+get '/documents/:id/discussions' do
+  @authors = Author.all
+  @document = Document.find(params[:id])
+  @comments = @document.comments.sort_by{|ver| ver[:c_date]}.reverse!
+  erb :'documents/discussions'
+end
+
+post '/documents/:id' do
+  @document = Document.find(params[:id])
+  comment = Comment.new(params[:comment]) #make new comment
+  comment.document = @document
+  comment.save
+  redirect("/documents/#{@document.id}/discussions")
+end
+
+
 
       # ============
-      #   Version
+      #   Comments
       # =============
