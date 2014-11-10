@@ -1,7 +1,7 @@
-drop table if exists authors cascade;
--- drop table if exists versions cascade;
--- drop table if exists documents cascade;
--- drop table if exists comments cascade;
+-- drop table if exists authors cascade;
+drop table if exists versions cascade;
+drop table if exists documents cascade;
+drop table if exists comments cascade;
 
 create table authors(
 	id serial primary key,
@@ -17,13 +17,13 @@ create table authors(
 create table documents(
 	id serial primary key,
 	title text not null,
-	img_url text,
 	created_at TIMESTAMP,
 	updated_at TIMESTAMP
 );
 
 create table versions(
 	id serial primary key,
+	img_url text,
   blurb text not null,
 	content text not null,
 	author_id integer references authors,

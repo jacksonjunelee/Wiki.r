@@ -3,13 +3,17 @@
 <form action="/documents/<%= @document.id %>" method="POST">
 	<input type="hidden" name="_method" value="PUT">
 
-<label for="author">Author:
+	<label for="author">Author:
     <select name="version[author_id]">
       <% @authors.each do |author| %>
         <option value="<%= author.id %>"><%= author.username %></option>
-      <% end %>
-    </select>
-  </label><br>
+	      <% end %>
+	    </select>
+	  </label><br>
+
+	<label for="Comment">Image Url:
+		<input type="text" name="version[img_url]" value="">
+			</label><br>
 
 	<label for="Comment">Description:
 		<textarea rows="4" cols="80" name="version[blurb]"> </textarea>

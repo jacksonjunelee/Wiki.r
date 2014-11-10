@@ -3,7 +3,7 @@
 <label for="Add comment">Add a comment</label>
 
 <form action="/documents/<%= @document.id %>" method="POST">
-<label for="author">Author:
+  <label for="author">Author:
     <select name="comment[author_id]">
       <% @authors.each do |author| %>
         <option value="<%= author.id %>"><%= author.username %></option>
@@ -15,9 +15,8 @@
     <textarea rows="4" cols="80" name="comment[com]"> </textarea>
       </label><br>
 
-<input type="submit" name="submit" value="Submit Comment">
+  <input type="submit" name="submit" value="Submit Comment">
 </form>
-
 
 
 <br>
