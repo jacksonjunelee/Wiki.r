@@ -1,0 +1,27 @@
+<h3> Edit <%= @author.username %> </h3>
+
+<form action="/authors/<%= @author.id %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+
+<!-- Hidden name -->
+
+  <input type="hidden" name="author[first_name]" value="<%= @author.first_name %>">
+  <input type="hidden" name="author[last_name]" value="<%= @author.last_name %>">
+
+<!-- Hidden name -->
+
+  <label for="Username">Username:
+    <input type="text" name="author[username]" value="<%= @author.username %>">
+      </label><br>
+
+  <label for="Password">Password:
+    <input type="text" name="author[password]" value="<%= @author.password %>">
+      </label><br>
+
+  <label for="Profile_pic">Profile Picture URL:
+    <input type="text" name="author[profile_pic]" value="<%= @author.profile_pic %>">
+      </label><br>
+
+  <input type="submit" name="submit" value="Submit Document">
+
+</form>

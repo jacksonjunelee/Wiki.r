@@ -6,14 +6,18 @@
     <link rel="stylesheet" href="/style.css">
     <title>Wiki.r</title>
   </head>
+
+  <header>
+    <div>
+      <form id="search_bar" action="/" method="post">
+        <input type="text" name="search[search]" value="">
+        <input type="submit" name="submit" value="Search Wiki">
+      </form>
+    </div>
+  </header>
+
   <body>
-
-    <form action="/" method="post">
-    <input type="text" name="search[search]" value="">
-    <input type="submit" name="submit" value="Search Wiki">
-    </form>
-
-      <div id="nav">
+      <div class="nav">
     <a href="/">Home</a>
       <span>||</span>
 		<a href="/authors">Authors</a>
@@ -21,8 +25,11 @@
 		<a href="/documents">Documents</a>
 	   </div>
 
+    <div>
 	<section id="main">
 		<%= yield %>
 	</section>
+</div>
+
   </body>
 </html>

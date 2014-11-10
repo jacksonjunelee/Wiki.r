@@ -62,7 +62,7 @@ end
       # =========
 # index
 get '/authors' do
-  @authors = Author.all
+  @authors = Author.all.order('id')
   erb :'authors/index'
 end
 
@@ -90,6 +90,20 @@ get '/authors/:id' do
 end
 
 # edit
+get '/authors/:id/edit' do
+  @author = Author.find(params[:id])
+  erb :'authors/edit'
+end
+
+put '/authors/:id' do
+  author = Author.find(params[:id])
+  if author.update(params[:author])
+    redirect("/authors/#{author.id}")
+  else
+    redirect("/authors")
+  end
+end
+
 
       # ============
       #   Document
