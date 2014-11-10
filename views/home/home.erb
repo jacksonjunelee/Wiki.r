@@ -3,7 +3,7 @@
 <h2> Recent Changes </h2>
   <% @changes.each do |change| %>
 
-  <label for="date">Edited on: <%= change.v_date %></label>
+  <label for="date">Edited on: <%= change.created_at %></label>
   <span>|</span>
   <label for="date">Edited by: <%= change.author.username %></label><br>
   <label for="recent_blurb">Description: <%= change.blurb %></label><br>

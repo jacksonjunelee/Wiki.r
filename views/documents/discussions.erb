@@ -29,6 +29,6 @@
 
 <% @comments.each do |comment| %>
 <label for="Comment">Date: <%= comment.c_date %></label>
-<h3>Edited by: <%= comment.author.username %></h3><br>
+<h3>Added by: <%= comment.author.username %></h3><br>
 <label for="Comment">Comment:<%= comment.com %></label><br>
 <% end %>

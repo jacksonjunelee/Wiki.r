@@ -1,5 +1,5 @@
 <%= @document.title %><br><br>
 
 <% @pre_ver.each do |pre_ver| %>
-  <a href= "/documents/<%= @document.id %>/previous_versions/<%= pre_ver.id %>"> <%= pre_ver.v_date %> </a><br>
+  <a href= "/documents/<%= @document.id %>/previous_versions/<%= pre_ver.id %>"> <%= pre_ver.created_at %> </a><br>
 <% end %>

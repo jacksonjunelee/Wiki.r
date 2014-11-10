@@ -82,6 +82,7 @@ get '/authors/:id' do
   @author = Author.find(params[:id])
   doc_id_array = @author.versions.map {|doc_id| doc_id.document_id}
   @documents = doc_id_array.map {|doc_id| Document.find(doc_id)}
+  binding.pry
   erb :'authors/show'
 end
 
@@ -189,7 +190,7 @@ post '/documents/:id' do
   redirect("/documents/#{@document.id}/discussions")
 end
 
-binding.pry
+
 
       # ============
       #   Comments
