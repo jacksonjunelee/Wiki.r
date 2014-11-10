@@ -64,10 +64,11 @@ A wiki is an application that allows users to create and modify content collabor
   - As a user, I want to be able to add comments to a wiki page on a "discuss"
     page used to discuss changes to a wiki document, so collaborators can talk
     debate about changes to a document
+  - As a user, I want to be able to search for wikis by title (only exact
+    matches need to be supported), so I can quickly find what I'm looking for  (layout)
 
     profile pictures, password hidden, username sign in, list of documents, list of changes, automatic timestamp
-    - As a user, I want to be able to search for wikis by title (only exact
-      matches need to be supported), so I can quickly find what I'm looking for  (layout)
+
   - As a user, I want to be able to see on the front page all recent activity
     done to the wiki (creations/edits/deletions), so I can keep up with the
     wiki's current events easily

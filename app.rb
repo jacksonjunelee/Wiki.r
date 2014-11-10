@@ -27,7 +27,11 @@ after { ActiveRecord::Base.connection.close }
       #   Home
       # =========
 
+#creation show
 get '/' do
+  versions = Version.all
+  changes = versions.sort_by{|ver| ver[:v_date]}.reverse!
+  @changes = changes[0..7]
   erb :'home/home'
 end
 
@@ -49,7 +53,6 @@ get '/search_results' do
   $doc_search
   erb :search
 end
-
 
       # =========
       #   Author
@@ -81,7 +84,6 @@ get '/authors/:id' do
   @documents = doc_id_array.map {|doc_id| Document.find(doc_id)}
   erb :'authors/show'
 end
-
 
       # ============
       #   Document
@@ -187,7 +189,7 @@ post '/documents/:id' do
   redirect("/documents/#{@document.id}/discussions")
 end
 
-
+binding.pry
 
       # ============
       #   Comments
