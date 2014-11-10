@@ -31,6 +31,26 @@ get '/' do
   erb :'home/home'
 end
 
+# search bar
+post "/" do
+  @authors = Author.all
+  @documents = Document.all
+  input = params[:search]
+  search_wiki = input[:search].downcase
+  $au_search = @authors.find {|author_search| author_search.username.downcase == search_wiki}
+  $doc_search =@documents.find {|doc_search| doc_search.title.downcase == search_wiki}
+  redirect("/search_results")
+end
+# Author.all.find {|author_search| author_search.username == "Moo"}
+
+#search results
+get '/search_results' do
+  $au_search
+  $doc_search
+  erb :search
+end
+
+
       # =========
       #   Author
       # =========
@@ -143,7 +163,8 @@ end
 get '/documents/:id/previous_versions/:var' do
   @document = Document.find(params[:id])
   @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
-  @show_pre_ver = @content.find {|ver| ver.id == 7}
+  var = params[:var]
+  @show_pre_ver = @content.find {|ver| ver.id == var.to_i}
   erb :'documents/pre_ver_show'
 end
 # Document.find(1).versions.find {|ver| ver.id == 10}
