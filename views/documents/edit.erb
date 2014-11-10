@@ -12,15 +12,15 @@
 	  </label><br>
 
 	<label for="Comment">Image Url:
-		<input type="text" name="version[img_url]" value="">
+		<input type="text" name="version[img_url]" value="<%= @edit_content.img_url%>">
 			</label><br>
 
 	<label for="Comment">Description:
-		<textarea rows="4" cols="80" name="version[blurb]"> </textarea>
+		<textarea rows="4" cols="80" name="version[blurb]"><%= @edit_content.blurb%></textarea>
 			</label><br>
 
 	<label for="Content">Content:
-		<textarea rows="4" cols="80" name="version[content]"> </textarea>
+		<textarea rows="4" cols="80" name="version[content]"><%= @edit_content.content%></textarea>
       </label><br>
 
   <input type="submit" name="submit" value="Submit Document">

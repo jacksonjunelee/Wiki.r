@@ -27,11 +27,14 @@ after { ActiveRecord::Base.connection.close }
       #   Home
       # =========
 
-#creation show
+#index , show recent changes, show new create documents
 get '/' do
   versions = Version.all
   changes = versions.sort_by{|ver| ver[:updated_at]}.reverse!
   @changes = changes[0..7]
+  document = Document.all
+  new_docs = document.sort_by{|new_updated| new_updated[:updated_at]}.reverse!
+  @new_docs = new_docs[0..7]
   erb :'home/home'
 end
 
@@ -82,6 +85,7 @@ get '/authors/:id' do
   @author = Author.find(params[:id])
   doc_id_array = @author.versions.map {|doc_id| doc_id.document_id}
   @documents = doc_id_array.map {|doc_id| Document.find(doc_id)}
+  @doc_list = @documents.uniq
   erb :'authors/show'
 end
 
@@ -128,6 +132,8 @@ end
 get '/documents/:id/edit' do
   @document = Document.find(params[:id])
   @authors = Author.all
+  content = @document.versions.sort_by{|ver| ver[:updated_at]}.reverse!
+  @edit_content = content.first
   erb :'documents/edit'
 end
 

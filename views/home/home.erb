@@ -1,5 +1,18 @@
 <h1> Welcome to Wiki </h1>
 
+<h2> New Documents</h2>
+  <% @new_docs.each do |new_doc| %>
+
+  <label for="date">Edited on: <%= new_doc.updated_at %></label><br>
+  <span>|</span>
+  <label for="author">Edited by: <%= new_doc.versions.first.author.username %></label><br>
+  <span>|</span>
+  <label for="title"> <a href ="/documents/<%= new_doc.id %>"><%= new_doc.title %></a></label><br>
+<% end %>
+
+versions.first.author.username
+
+
 <h2> Recent Changes </h2>
   <% @changes.each do |change| %>
 
