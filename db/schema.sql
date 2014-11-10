@@ -1,7 +1,7 @@
 drop table if exists authors cascade;
-drop table if exists versions cascade;
-drop table if exists documents cascade;
-drop table if exists comments cascade;
+-- drop table if exists versions cascade;
+-- drop table if exists documents cascade;
+-- drop table if exists comments cascade;
 
 create table authors(
 	id serial primary key,
@@ -9,6 +9,7 @@ create table authors(
   last_name varchar(255) not null,
   username varchar(255) not null,
 	password varchar(255) not null,
+	profile_pic text,
 	created_at TIMESTAMP,
 	updated_at TIMESTAMP
 );
@@ -33,7 +34,6 @@ create table versions(
 
 create table comments(
 	id serial primary key,
-	c_date integer not null,
 	com text not null,
 	author_id integer references authors,
 	document_id integer references documents,

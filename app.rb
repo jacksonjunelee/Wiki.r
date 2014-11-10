@@ -30,7 +30,7 @@ after { ActiveRecord::Base.connection.close }
 #creation show
 get '/' do
   versions = Version.all
-  changes = versions.sort_by{|ver| ver[:v_date]}.reverse!
+  changes = versions.sort_by{|ver| ver[:updated_at]}.reverse!
   @changes = changes[0..7]
   erb :'home/home'
 end
@@ -82,7 +82,6 @@ get '/authors/:id' do
   @author = Author.find(params[:id])
   doc_id_array = @author.versions.map {|doc_id| doc_id.document_id}
   @documents = doc_id_array.map {|doc_id| Document.find(doc_id)}
-  binding.pry
   erb :'authors/show'
 end
 
@@ -117,7 +116,7 @@ end
 # show
 get '/documents/:id' do
   @document = Document.find(params[:id])
-  @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
+  @content = @document.versions.sort_by{|ver| ver[:updated_at]}.reverse!
   # @content = content.first
   # @author = @content.first.author.username
   erb :'documents/show'
@@ -157,7 +156,7 @@ end
 
 get '/documents/:id/previous_versions' do
   @document = Document.find(params[:id])
-  @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
+  @content = @document.versions.sort_by{|ver| ver[:updated_at]}.reverse!
   @pre_ver = @content[1..-1]
   erb :'documents/previous_versions'
 end
@@ -165,7 +164,7 @@ end
 
 get '/documents/:id/previous_versions/:var' do
   @document = Document.find(params[:id])
-  @content = @document.versions.sort_by{|ver| ver[:v_date]}.reverse!
+  @content = @document.versions.sort_by{|ver| ver[:updated_at]}.reverse!
   var = params[:var]
   @show_pre_ver = @content.find {|ver| ver.id == var.to_i}
   erb :'documents/pre_ver_show'
@@ -178,7 +177,7 @@ end
 get '/documents/:id/discussions' do
   @authors = Author.all
   @document = Document.find(params[:id])
-  @comments = @document.comments.sort_by{|ver| ver[:c_date]}.reverse!
+  @comments = @document.comments.sort_by{|ver| ver[:updated_at]}.reverse!
   erb :'documents/discussions'
 end
 

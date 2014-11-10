@@ -11,10 +11,6 @@
     </select>
   </label><br>
 
-  <label for="c-date">Date
-        <input type="text" name="comment[c_date]" value="">
-      </label><br>
-
   <label for="Comment">Comment
     <textarea rows="4" cols="80" name="comment[com]"> </textarea>
       </label><br>
@@ -28,7 +24,7 @@
 
 
 <% @comments.each do |comment| %>
-<label for="Comment">Date: <%= comment.c_date %></label>
+<label for="Comment">Date: <%= comment.updated_at %></label>
 <h3>Added by: <%= comment.author.username %></h3><br>
 <label for="Comment">Comment:<%= comment.com %></label><br>
 <% end %>
