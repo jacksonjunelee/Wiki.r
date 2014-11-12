@@ -18,7 +18,7 @@ end
 
 ActiveRecord::Base.establish_connection({
 	adapter: 'postgresql',
-	database: 'wiki_db',
+	database: 'jackson_wiki',
 })
 
 after { ActiveRecord::Base.connection.close }
@@ -60,12 +60,30 @@ end
 
 #search results
 get '/search_results' do
-  $au_search
-  $doc_search
-  $version_search
+  @authors = Author.all.order('username')
+  @documents = Document.all.order('title')
+  @versions = Version.all
+
+  input = params[:search]
+  search_wiki = input[:search].downcase
+  doc_search = @documents.map {|doc| doc if doc.title.downcase.include?(search_wiki)}
+  au_search = @authors.map { |au| au if au.username.downcase.include?(search_wiki)}
+  version_search =@versions.map {|version| version if version.blurb.downcase.include?(search_wiki) || version.content.downcase.include?(search_wiki)}
+
   @doc = []
   @au = []
   @version = []
+
+  doc_search.each do |doc|
+    @doc.push(doc.title) if doc != nil
+  end
+  au_search.each do |au|
+    @au.push(au.username) if au != nil
+  end
+  version_search.each do |version|
+    @version.push(version.document.title) if version != nil
+  end
+  
   erb :search
 end
 

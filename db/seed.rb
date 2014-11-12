@@ -6,5 +6,5 @@ require_relative '../models/documents.rb'
 
 ActiveRecord::Base.establish_connection({
 	adapter: 'postgresql',
-	database: 'wiki_db',
+	database: 'jackson_wiki',
 })
