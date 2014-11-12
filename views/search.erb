@@ -1,7 +1,20 @@
 <h2> Search Results: </h2>
 
-<% if $au_search == nil %>
-  <a href = "/documents/<%= $doc_search.id %>"><%= $doc_search.title %></a>
-<% else %>
-  <a href = "/authors/<%= $au_search.id %>"><%= $au_search.username %></a>
-<% end %>
+<h3>Documents:<h3>
+  <% $doc_search.each do |doc| %>
+  <% @doc.push(doc.title) if doc != nil %>
+  <% end %>
+  <%= @doc.uniq.join("") %>
+
+
+<h3>Authors:<h3>
+  <% $au_search.each do |au| %>
+  <% @au.push(au.username) if au != nil %>
+  <% end %>
+  <%= @au.join("") %>
+
+<h3>Content:<h3>
+  <% $version_search.each do |version| %>
+  <% @version.push(version.document.title) if version != nil %>
+  <% end %>
+  <%= @version.uniq.join("") %>

@@ -3,3 +3,13 @@
 <img src = "<%= @show_pre_ver.img_url%>" /><br>
 <%= @show_pre_ver.blurb%><br>
 <%= @show_pre_ver.content%>
+
+<form action="/documents/<%= @document.id %>/previous_versions" method="POST">
+  <input type="hidden" name="_method" value=PUT>
+    <input type="hidden" name="revert_previous[img_url]" value="<%= @show_pre_ver.img_url%>">
+    <input type="hidden" name="revert_previous[blurb]" value="<%= @show_pre_ver.blurb%>">
+    <input type="hidden" name="revert_previous[content]" value="<%= @show_pre_ver.content%>">
+    <input type="hidden" name="revert_previous[author_id]" value="<%= @show_pre_ver.author_id%>">
+    <input type="hidden" name="revert_previous[document_id]" value="<%= @show_pre_ver.document_id%>">
+  <button>Revert</button>
+</form>

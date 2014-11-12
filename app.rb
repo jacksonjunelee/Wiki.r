@@ -40,12 +40,20 @@ end
 
 # search bar
 post "/" do
-  @authors = Author.all
-  @documents = Document.all
+  @authors = Author.all.order('username')
+  @documents = Document.all.order('title')
+  @versions = Version.all
   input = params[:search]
   search_wiki = input[:search].downcase
-  $au_search = @authors.find {|author_search| author_search.username.downcase == search_wiki}
-  $doc_search =@documents.find {|doc_search| doc_search.title.downcase == search_wiki}
+  $doc_search = @documents.map {|doc| doc if doc.title.downcase.include?(search_wiki)}
+  $au_search = @authors.map { |au| au if au.username.downcase.include?(search_wiki)}
+  $version_search =@versions.map {|version| version if version.blurb.downcase.include?(search_wiki) || version.content.downcase.include?(search_wiki)}
+  # $doc_search= Document.all.map {|doc| doc if doc.title.downcase.include?("p")}
+  # $doc_search= @documents.find { |doc_search| doc_search.title.downcase.include?(search_wiki)}
+  # $doc_search= Document.all.find {:all, :conditions => :title.downcase => search_wiki}
+  # $au_search = @authors.find {|author_search| author_search.username.downcase.include?(search_wiki)}
+  # $doc_search =@documents.find {|doc_search| doc_search.title.downcase == search_wiki}
+  # Document.all.find {|doc_search| doc_search.title.downcase == ("p")}
   redirect("/search_results")
 end
 # Author.all.find {|author_search| author_search.username == "Moo"}
@@ -54,6 +62,10 @@ end
 get '/search_results' do
   $au_search
   $doc_search
+  $version_search
+  @doc = []
+  @au = []
+  @version = []
   erb :search
 end
 
@@ -62,7 +74,7 @@ end
       # =========
 # index
 get '/authors' do
-  @authors = Author.all.order('id')
+  @authors = Author.all.order('username')
   erb :'authors/index'
 end
 
@@ -111,13 +123,13 @@ end
 
 # index
 get '/documents' do
-  @documents = Document.all
+  @documents = Document.all.order('title')
   erb :'documents/index'
 end
 
 # new
 get '/documents/new' do
-  @author = Author.all
+  @author = Author.all.order('username')
   erb :'documents/new'
 end
 
@@ -145,7 +157,7 @@ end
 # edit and update
 get '/documents/:id/edit' do
   @document = Document.find(params[:id])
-  @authors = Author.all
+  @authors = Author.all.order('username')
   content = @document.versions.sort_by{|ver| ver[:updated_at]}.reverse!
   @edit_content = content.first
   erb :'documents/edit'
@@ -191,8 +203,18 @@ get '/documents/:id/previous_versions/:var' do
   @show_pre_ver = @content.find {|ver| ver.id == var.to_i}
   erb :'documents/pre_ver_show'
 end
-# Document.find(1).versions.find {|ver| ver.id == 10}
-# 7?
+
+# Revert
+
+put '/documents/:id/previous_versions' do
+  document = Document.find(params[:id])
+  revert_document = Version.new(params[:revert_previous])
+  if revert_document.save
+    redirect("/documents/#{document.id}")
+  else
+    redirect("/documents/#{document_id}/previous_versions")
+  end
+end
 
 # show discussions page and make new comments
 
@@ -210,7 +232,6 @@ post '/documents/:id' do
   comment.save
   redirect("/documents/#{@document.id}/discussions")
 end
-
 
 
       # ============
